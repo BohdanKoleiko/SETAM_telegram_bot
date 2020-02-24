@@ -5,4 +5,4 @@ pip-wheel-metadata/
 pip-log.txt
 pip-delete-this-directory.txt
 .venv
-venv/
+/home/bogdan/My_python_projekt/venv/
