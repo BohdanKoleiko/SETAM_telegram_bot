@@ -36,7 +36,6 @@ def send_start_keyboard(message):
 @bot.message_handler(regexp='Меню питання щодо Setam')
 @bot.message_handler(func=lambda msg: msg.text in START_KEYBOARD.values())
 def send_menu_answer(msg):
-    print(msg.text)
     if (msg.text == START_KEYBOARD.get('WhatIsSetam')) or (msg.text == 'Меню питання щодо Setam'):
         key_but = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
         key_but.add(*WhatIsSetam.values())
