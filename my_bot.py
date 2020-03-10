@@ -1,5 +1,6 @@
 import telebot
-from config import *
+from key_but import *
+from config import TOKEN
 from telebot import types
 
 bot = telebot.TeleBot(TOKEN)
@@ -87,11 +88,11 @@ def send_menu_WhatIsSetam(msg):
             bot.send_message(chat_id=msg.chat.id, text=txt_voluntary)
             v.close()
 
-    if msg.text == WhatIsSetam.get('FreeTransfer'):
-        with open('doc/Free transfer.txt', 'r') as f:
-            txt_transfer = f.read()
-            bot.send_message(chat_id=msg.chat.id, text=txt_transfer)
-            f.close()
+    # if msg.text == WhatIsSetam.get('FreeTransfer'):
+    #     with open('doc/Free transfer.txt', 'r') as f:
+    #         txt_transfer = f.read()
+    #         bot.send_message(chat_id=msg.chat.id, text=txt_transfer)
+    #         f.close()
 
 
 @bot.message_handler(func=lambda msg: msg.text in Bidding.values())
@@ -174,13 +175,19 @@ def send_finans_info(msg):
             r.close()
 
 
-@bot.message_handler(func=lambda msg: msg.text == OtherServicesSetam['Marriage'])
-def send_answer_mariage(message):
-    with open('doc/Marriage for the day.txt', 'r') as m:
-        txt = m.read()
-        bot.send_message(chat_id=message.chat.id, text=txt)
-        m.close()
+@bot.message_handler(func=lambda msg: msg.text in OtherServicesSetam.values())
+def send_answer_mariage(msg):
+    if msg.text == OtherServicesSetam.get('Marriage'):
+        with open('doc/Marriage for the day.txt', 'r') as m:
+            txt = m.read()
+            bot.send_message(chat_id=msg.chat.id, text=txt)
+            m.close()
 
+    if msg.text == OtherServicesSetam.get('FreeTransfer'):
+        with open('doc/Free transfer.txt', 'r') as f:
+            txt_transfer = f.read()
+            bot.send_message(chat_id=msg.chat.id, text=txt_transfer)
+            f.close()
 
 print('start bot')
 bot.polling()
